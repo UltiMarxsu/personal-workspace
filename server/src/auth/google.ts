@@ -789,7 +789,7 @@ async function exchangeCodeForTokens(appEnv: AppEnv, code: string) {
     grant_type: "authorization_code",
   });
 
-  console.log("Redirect URI being sent:", appEnv.auth.googleRedirectUri);
+  console.log("Redirect URI being sent:", appEnv.auth.googleRedirectUri); // <-- ADD THIS LINE
 
   const response = await fetch("https://oauth2.googleapis.com/token", {
     method: "POST",
@@ -842,9 +842,7 @@ async function createSession(
     Date.now() + sessionConfig.durationDays * 24 * 60 * 60 * 1000,
   );
 
-  await pool.execute(
-    `DELETE FROM ${sessionConfig.tableName} WHERE expires_at < UTC_TIMESTAMP()`,
-  );
+  await pool.execute(`DELETE FROM ${sessionConfig.tableName} WHERE expires_at < UTC_TIMESTAMP()`);
 
   await pool.execute(
     `
@@ -1246,7 +1244,7 @@ export function createAuthRouter(appEnv: AppEnv): Router {
       sameSite: "lax",
     });
 
-    const tokenSet = await exchangeCodeForTokens(appEnv, code);
+    const tokenSet = await exchangeCodeForTokens(appEnv, code as string);
     const profile = await fetchGoogleUserInfo(tokenSet.access_token);
 
     if (!profile.email_verified) {
@@ -1762,7 +1760,7 @@ export function createVaultAuthRouter(appEnv: AppEnv): Router {
       sameSite: "lax",
     });
 
-    const tokenSet = await exchangeCodeForTokens(appEnv, code);
+    const tokenSet = await exchangeCodeForTokens(appEnv, code as string);
     const profile = await fetchGoogleUserInfo(tokenSet.access_token);
 
     if (!profile.email_verified) {
