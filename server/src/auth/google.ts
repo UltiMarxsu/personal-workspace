@@ -789,7 +789,7 @@ async function exchangeCodeForTokens(appEnv: AppEnv, code: string) {
     grant_type: "authorization_code",
   });
 
-  console.log("Redirect URI being sent:", appEnv.auth.googleRedirectUri); // <-- ADD THIS LINE
+  console.log("Redirect URI being sent:", appEnv.auth.googleRedirectUri);
 
   const response = await fetch("https://oauth2.googleapis.com/token", {
     method: "POST",
@@ -801,7 +801,7 @@ async function exchangeCodeForTokens(appEnv: AppEnv, code: string) {
 
   if (!response.ok) {
     const details = await response.text();
-    console.error("Google token exchange error details:", details); // <-- ADD THIS LINE
+    console.error("Google token exchange error details:", details);
     throw new Error(`Google token exchange failed: ${details}`);
   }
 
