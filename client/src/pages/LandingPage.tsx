@@ -142,8 +142,6 @@ export default function LandingPage() {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
               All your work.
             </span>
-            <br />
-            <span>Hee</span>
           </h1>
 
           <p className="text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto mb-10">

@@ -789,6 +789,8 @@ async function exchangeCodeForTokens(appEnv: AppEnv, code: string) {
     grant_type: "authorization_code",
   });
 
+  console.log("Redirect URI being sent:", appEnv.auth.googleRedirectUri);
+
   const response = await fetch("https://oauth2.googleapis.com/token", {
     method: "POST",
     headers: {
