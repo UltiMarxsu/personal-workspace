@@ -801,6 +801,7 @@ async function exchangeCodeForTokens(appEnv: AppEnv, code: string) {
 
   if (!response.ok) {
     const details = await response.text();
+    console.error("Google token exchange error details:", details); // <-- ADD THIS LINE
     throw new Error(`Google token exchange failed: ${details}`);
   }
 
